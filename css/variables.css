@@ -1,0 +1,16 @@
+:root {
+  /* ===== 色 ===== */
+  --color-background: #ffffff;  /* ページ背景色 */
+  --color-surface: #f5f5f5;  /* カード背景色 */
+  --color-text: #1a1a1a;  /* 通常テキスト色 */
+  --color-text-muted: #6b6b6b;  /* 説明文などの薄いテキスト色 */
+  --color-accent: #2563eb;  /* リンクや強調箇所の色  */
+  --color-border: #e5e5e5;  /* 枠線の色 */
+
+  /* ===== フォント ===== */
+  --font-family-base: "Helvetica Neue", Arial, "Hiragino Sans", sans-serif;
+
+  /* ===== サイズ ===== */
+  --radius-base: 8px;  /* 角丸の大きさ（数値を大きくすると丸くなる） */
+  --spacing-unit: 8px;  /* 余白の基本単位（数値を大きくすると余白が広くなる） */
+}
