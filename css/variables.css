@@ -1,16 +1,16 @@
 :root {
-  --color-background: #fafafa;
-  --color-surface: #ffffff;
-  --color-text: #2c3e50;
-  --color-text-muted: #7f8c8d;
-  --color-accent: #2980b9;
-  --color-border: #ecf0f1;
+  --color-background: #1a1a1a;
+  --color-surface: #2d2d2d;
+  --color-text: #e8e8e8;
+  --color-text-muted: #999999;
+  --color-accent: #4a90e2;
+  --color-border: #404040;
   --font-family-base: "Segoe UI", "Hiragino Kaku Gothic ProN", sans-serif;
   --radius-base: 6px;
   --spacing-unit: 12px;
-  --layout-align: center;
-  --font-size-base: 16px;
-  --line-height-base: 1.6;
+  --layout-align: left;
+  --font-size-base: 15px;
+  --line-height-base: 1.7;
   --container-width: 900px;
   --grid-columns: 2;
 }
