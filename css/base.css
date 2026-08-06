@@ -1,0 +1,239 @@
+* {
+  box-sizing: border-box;
+}
+
+/* remは <html> の font-size が基準になる。ここを --font-size-base で
+   動かすことで、2rem/1.1rem/0.9rem など本文中のrem指定がすべて連動して
+   拡大縮小する（bodyのfont-sizeを変えるだけではremには効かないため）。 */
+html {
+  font-size: var(--font-size-base, 16px);
+}
+
+body.portfolio-body {
+  margin: 0;
+  background: var(--color-background, #ffffff);
+  color: var(--color-text, #1a1a1a);
+  font-family: var(--font-family-base, "Helvetica Neue", Arial, "Hiragino Sans", sans-serif);
+  line-height: var(--line-height-base, 1.6);
+}
+
+/*
+ * レイアウト構成（body[data-layout]）の実装方針:
+ *
+ * ヘッダー・SNS・スキル・本文・フッターを .portfolio-page の直下（＝兄弟要素）
+ * にし、.portfolio-page を1本のFlexboxにすることで、各セクションの見た目上の
+ * 並び順を CSS の order だけで入れ替えられるようにしている。HTML自体の生成順は
+ * 変えず、data-layout属性ごとに一部の order / position を上書きする。
+ *
+ * 各セクションの既定 order:
+ *   1: .portfolio-header   2: .portfolio-skills   3: .portfolio-socials
+ *   4: .portfolio-main     100: .portfolio-footer（常に最後に固定）
+ */
+.portfolio-page {
+  max-width: var(--container-width, 960px);
+  margin: 0 auto;
+  padding: 0 calc(var(--spacing-unit, 8px) * 3);
+  /* 絶対配置になっている .portfolio-socials（standard/skills-bottom時）の基準 */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-header {
+  order: 1;
+  padding-top: calc(var(--spacing-unit, 8px) * 6);
+}
+
+/* var() の第2引数は既定値（フォールバック）。
+   --header-name-align / --header-tagline-align は名前・自己紹介だけ個別に
+   揃え方を変えたいときの任意指定で、無ければ --layout-align に従い、
+   --layout-align も無ければ left になる（この機能より前に生成された
+   サイトの variables.css にはどちらも存在しないため、最終的な既定値が必要）。 */
+.portfolio-header__name {
+  margin: 0 0 calc(var(--spacing-unit, 8px) * 1) 0;
+  font-size: 2rem;
+  text-align: var(--header-name-align, var(--layout-align, left));
+}
+
+.portfolio-header__tagline {
+  margin: 0;
+  color: var(--color-text-muted, #6b6b6b);
+  text-align: var(--header-tagline-align, var(--layout-align, left));
+  /* 自己紹介の改行をそのまま表示する */
+  white-space: pre-line;
+}
+
+/* 既定（data-layout="standard" / "skills-bottom"）ではヘッダー右上に固定する。
+   .portfolio-page が position:relative の基準になっており、
+   topはヘッダーの上padding分だけ ずらして名前の高さに合わせている。
+   socials-inline時はこのpositionを打ち消してFlexboxの通常フローに戻す
+   （下の body[data-layout="socials-inline"] 参照）。 */
+.portfolio-socials {
+  order: 3;
+  position: absolute;
+  top: calc(var(--spacing-unit, 8px) * 6);
+  right: calc(var(--spacing-unit, 8px) * 3);
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--spacing-unit, 8px) * 1.5);
+}
+
+.portfolio-socials__link {
+  display: inline-flex;
+  color: var(--color-text, #1a1a1a);
+  transition: opacity 0.2s;
+}
+
+.portfolio-socials__link svg {
+  display: block;
+  fill: currentColor;
+}
+
+.portfolio-socials__link:hover {
+  opacity: 0.6;
+}
+
+.portfolio-skills {
+  order: 2;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  /* left/center/right はjustify-contentの値としてもそのまま有効なため、
+     --layout-align をヘッダー文字列と同じ変数で揃えられる。 */
+  justify-content: var(--layout-align, left);
+  gap: calc(var(--spacing-unit, 8px) * 1);
+  margin: calc(var(--spacing-unit, 8px) * 2) 0 0 0;
+  padding: 0;
+}
+
+.portfolio-skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--spacing-unit, 8px) * 0.75);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: calc(var(--spacing-unit, 8px) * 0.5) calc(var(--spacing-unit, 8px) * 1.25);
+  border-radius: var(--radius-base, 8px);
+  background: var(--color-surface, #f5f5f5);
+  border: 1px solid var(--color-border, #e5e5e5);
+  color: var(--color-text, #1a1a1a);
+}
+
+/* アイコンが読み込み中/失敗中でもバッジの高さが揺れないよう固定サイズにする。
+   失敗時はbuildSkillsHtmlのonerrorでdisplay:noneになり、テキストだけが残る。 */
+.portfolio-skill-badge__icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* 幅の制約は親の .portfolio-page が担うため、ここでは持たない
+   （.portfolio-skills / .portfolio-socials など他の兄弟要素と横幅を揃えるため）。 */
+.portfolio-main {
+  order: 4;
+  margin-top: calc(var(--spacing-unit, 8px) * 6);
+  padding-bottom: calc(var(--spacing-unit, 8px) * 2);
+}
+
+.portfolio-projects__title {
+  margin-bottom: calc(var(--spacing-unit, 8px) * 2);
+  text-align: var(--layout-align, left);
+}
+
+.portfolio-projects__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns, 2), 1fr);
+  gap: calc(var(--spacing-unit, 8px) * 2);
+}
+
+/* --grid-columns は固定列数のため、狭い画面でそのまま使うとカードが
+   潰れる。AIがどんな列数を選んでも崩れないよう、モバイル幅では
+   強制的に1列に戻す（レイアウト崩壊防止のための安全策）。 */
+@media (max-width: 640px) {
+  .portfolio-projects__list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.portfolio-project-card {
+  border: 1px solid var(--color-border, #e5e5e5);
+  border-radius: var(--radius-base, 8px);
+  background: var(--color-surface, #f5f5f5);
+  padding: calc(var(--spacing-unit, 8px) * 2);
+}
+
+.portfolio-project-card__name {
+  margin: 0 0 calc(var(--spacing-unit, 8px) * 1) 0;
+  font-size: 1.1rem;
+}
+
+.portfolio-project-card__link {
+  color: var(--color-accent, #2563eb);
+  text-decoration: none;
+}
+
+.portfolio-project-card__link:hover {
+  text-decoration: underline;
+}
+
+.portfolio-project-card__description {
+  margin: 0 0 calc(var(--spacing-unit, 8px) * 1) 0;
+  color: var(--color-text-muted, #6b6b6b);
+  font-size: 0.9rem;
+}
+
+.portfolio-project-card__appeal {
+  margin: 0 0 calc(var(--spacing-unit, 8px) * 1) 0;
+  color: var(--color-text, #1a1a1a);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.portfolio-project-card__languages {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--spacing-unit, 8px) * 1);
+  margin: 0;
+  padding: 0;
+}
+
+.portfolio-project-card__language {
+  font-size: 0.75rem;
+  padding: 2px calc(var(--spacing-unit, 8px) * 1);
+  border-radius: 999px;
+  background: var(--color-background, #ffffff);
+  border: 1px solid var(--color-border, #e5e5e5);
+  color: var(--color-text-muted, #6b6b6b);
+}
+
+/* orderを100にして、どのdata-layoutパターンでも必ず最後に来るようにする。 */
+.portfolio-footer {
+  order: 100;
+  text-align: center;
+  margin-top: calc(var(--spacing-unit, 8px) * 3);
+  padding: calc(var(--spacing-unit, 8px) * 3) 0;
+  color: var(--color-text-muted, #6b6b6b);
+  font-size: 0.8rem;
+}
+
+/* ===== レイアウト構成の切り替え ===== */
+
+/* skills-bottom: スキルをリポジトリ一覧（order:4）の後ろ・フッター（order:100）の
+   前に移動する。ヘッダー直下ではなくなるため、スキル自身の上マージンも
+   ヘッダーからの間隔ではなくProjectsからの間隔に合わせて調整する。 */
+body[data-layout="skills-bottom"] .portfolio-skills {
+  order: 5;
+  margin-top: calc(var(--spacing-unit, 8px) * 6);
+}
+
+/* socials-inline: 絶対配置をやめて通常のFlexboxの流れに戻す。
+   order:3のまま（スキルの後・本文の前）なので、位置を再指定する必要はない。 */
+body[data-layout="socials-inline"] .portfolio-socials {
+  position: static;
+  margin: calc(var(--spacing-unit, 8px) * 2) 0 0 0;
+}
