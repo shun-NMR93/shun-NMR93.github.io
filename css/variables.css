@@ -1,16 +1,16 @@
 :root {
-  --color-background: #f8f9fa;
-  --color-surface: #ffffff;
-  --color-text: #2c3e50;
-  --color-text-muted: #7f8c8d;
-  --color-accent: #34495e;
-  --color-border: #ecf0f1;
+  --color-background: #2a2a2a;
+  --color-surface: #353535;
+  --color-text: #e8e8e8;
+  --color-text-muted: #a0a0a0;
+  --color-accent: #4a9eff;
+  --color-border: #4a4a4a;
   --font-family-base: "Segoe UI", "Hiragino Kaku Gothic ProN", sans-serif;
   --radius-base: 6px;
-  --spacing-unit: 14px;
+  --spacing-unit: 12px;
   --layout-align: left;
   --font-size-base: 15px;
   --line-height-base: 1.7;
-  --container-width: 900px;
+  --container-width: 950px;
   --grid-columns: 2;
 }
