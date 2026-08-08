@@ -7,7 +7,12 @@
     "Python",
     "Java"
   ],
-  "socialLinks": [],
+  "socialLinks": [
+    {
+      "platform": "twitter",
+      "url": "https://x.com/hikakin?lang=ja"
+    }
+  ],
   "layoutPattern": "standard",
   "repositories": [
     {
