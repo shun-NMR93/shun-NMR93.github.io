@@ -1,16 +1,16 @@
 :root {
   --color-background: #0d1117;
   --color-surface: #161b22;
-  --color-text: #e6edf3;
+  --color-text: #e8eef5;
   --color-text-muted: #8b949e;
   --color-accent: #58a6ff;
   --color-border: #30363d;
   --font-family-base: "Segoe UI", "Hiragino Kaku Gothic ProN", sans-serif;
   --radius-base: 6px;
-  --spacing-unit: 12px;
+  --spacing-unit: 10px;
   --layout-align: left;
   --font-size-base: 15px;
   --line-height-base: 1.6;
-  --container-width: 1100px;
+  --container-width: 1050px;
   --grid-columns: 3;
 }
