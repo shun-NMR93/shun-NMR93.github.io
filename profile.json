@@ -11,12 +11,6 @@
   "layoutPattern": "standard",
   "repositories": [
     {
-      "name": "suretiagai-app",
-      "generatedText": "BLEでバックグラウンド通信し近くの端末とプロフィールを交換するすれ違い通信アプリ。CoreBluetoothとCoreMotionを組み合わせ、歩数計測と連動したレーダーアニメーション表示に対応している。",
-      "appealText": "",
-      "sourceHash": "2dd70c0e6dcb974cf32ba32632a54713846870cffa22b91627aded67367ca586"
-    },
-    {
       "name": "bletest-app",
       "generatedText": "iOSデバイス間でBLE通信を行うテストアプリ。CoreBluetoothでCentralとPeripheralの両役割を実装し、バックグラウンド受信とフォアグラウンド送信に対応している。",
       "appealText": "",
@@ -27,6 +21,12 @@
       "generatedText": "",
       "appealText": "",
       "sourceHash": ""
+    },
+    {
+      "name": "suretiagai-app",
+      "generatedText": "BLEでバックグラウンド通信し近くの端末とプロフィールを交換するすれ違い通信アプリ。CoreBluetoothとCoreMotionを組み合わせ、歩数計測と連動したレーダーアニメーション表示に対応している。",
+      "appealText": "",
+      "sourceHash": "2dd70c0e6dcb974cf32ba32632a54713846870cffa22b91627aded67367ca586"
     }
   ]
 }
