@@ -1,16 +1,16 @@
 :root {
-  --color-background: #f8f9fa;
-  --color-surface: #ffffff;
-  --color-text: #1a1a1a;
-  --color-text-muted: #666666;
-  --color-accent: #0052cc;
-  --color-border: #d0d0d0;
-  --font-family-base: "Yu Gothic", "Hiragino Sans", sans-serif;
-  --radius-base: 6px;
-  --spacing-unit: 12px;
+  --color-background: #1a0033;
+  --color-surface: #2d0052;
+  --color-text: #ffff00;
+  --color-text-muted: #cc00ff;
+  --color-accent: #00ff00;
+  --color-border: #ff00ff;
+  --font-family-base: "Impact", "Hiragino Kaku Gothic ProN", sans-serif;
+  --radius-base: 12px;
+  --spacing-unit: 10px;
   --layout-align: center;
-  --font-size-base: 15px;
-  --line-height-base: 1.8;
-  --container-width: 900px;
-  --grid-columns: 2;
+  --font-size-base: 17px;
+  --line-height-base: 1.5;
+  --container-width: 1050px;
+  --grid-columns: 4;
 }

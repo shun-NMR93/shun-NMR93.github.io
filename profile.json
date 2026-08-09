@@ -21,6 +21,12 @@
       "generatedText": "iOSデバイス間でBLE通信を行うテストアプリ。CoreBluetoothでCentralとPeripheralの両役割を実装し、バックグラウンド受信とフォアグラウンド送信に対応している。",
       "appealText": "",
       "sourceHash": "8da548b17d7e1199d60f4158e4f4ead792c5411e13320989182e03be931d90f5"
+    },
+    {
+      "name": "memotest-app",
+      "generatedText": "",
+      "appealText": "",
+      "sourceHash": ""
     }
   ]
 }
