@@ -1,5 +1,5 @@
 {
-  "displayName": "Nomura Shun",
+  "displayName": "野村 駿 / Nomura Shun",
   "tagline": "愛知工業大学　情報科学部　コンピュータシステム専攻　３年\n現在は、Core Bluetooth（BLE）を用いたすれ違い通信アプリを開発しており、\niOSの制約下でのバックグラウンド通信の実現に取り組んでいます。\nMCPC主催のナノコン応用コンテストにも参加し、\n超小型IoTデバイスLeafonyと電子ペーパーとLTEを用いたプロダクトを製作中。\n主に、LeafonyとiOSアプリ間のBLE通信を担当しています。\n\nネットワークやインフラ分野に関心があり、目に見えない通信の挙動を\n検証しながら理解を深めていくことに面白さを感じています。",
   "skills": [
     "Swift",
